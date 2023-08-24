@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +17,5 @@ Route::middleware('auth:sanctum')->get('/me', [\App\Http\Controllers\Me\MeContro
 
 Route::post('login', \App\Http\Controllers\Auth\LoginController::class);
 Route::post('logout', \App\Http\Controllers\Auth\LogoutController::class);
+Route::post('register', \App\Http\Controllers\Auth\RegisterController::class);
 
