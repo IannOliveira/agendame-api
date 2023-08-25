@@ -19,4 +19,7 @@ Route::post('login', \App\Http\Controllers\Auth\LoginController::class);
 Route::post('logout', \App\Http\Controllers\Auth\LogoutController::class);
 Route::post('register', \App\Http\Controllers\Auth\RegisterController::class);
 Route::post('verify-email', \App\Http\Controllers\Auth\VerifyEmailController::class);
+Route::post('forgot-password', \App\Http\Controllers\Auth\ForgotPasswordController::class);
+Route::post('reset-password', \App\Http\Controllers\Auth\ResetPasswordController::class);
+
 
