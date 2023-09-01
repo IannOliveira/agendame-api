@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/me', [\App\Http\Controllers\Me\MeController::class, 'show']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/me', [\App\Http\Controllers\Me\MeController::class, 'show']);
+    Route::post('/subscribe', \App\Http\Controllers\Subscription\SubscribeController::class);
+});
 
 Route::post('login', \App\Http\Controllers\Auth\LoginController::class);
 Route::post('logout', \App\Http\Controllers\Auth\LogoutController::class);
