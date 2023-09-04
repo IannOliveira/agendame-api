@@ -46,4 +46,9 @@ class User extends Authenticatable
     public function stripeName(){
         return $this->first_name;
     }
+
+    public function hasSubscription(){
+        return $this->subscriptions()->active()->exists();
+    }
+
 }
