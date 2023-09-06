@@ -3,12 +3,13 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Permission;
 use App\Models\Plan;
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -59,34 +60,34 @@ class DatabaseSeeder extends Seeder
             'stripe_price_yearly_id' => 'price_1Nmfa5L6ie8fhqijmyeWKwUf',
         ]);
 
+        //Role admin
         $roleAdmin = Role::create([
             'name' => 'admin',
             'label' => 'Administrador'
         ]);
+        $permissionAdmin = Permission::create([
+            'name' => 'delete_user',
+            'label' => 'Deletar usuário',
+        ]);
+        $roleAdmin->givePermissionTo($permissionAdmin);
 
+        //Role seller
         $roleSeller = Role::create([
             'name' => 'seller',
             'label' => 'Vendedor'
         ]);
-
-        $permissionA = Permission::create([
-            'name' => 'edit_post',
-            'label' => 'Editar blog post'
+        $permissionSeller = Permission::create([
+            'name' => 'ship_product',
+            'label' => 'Despachar produto',
         ]);
+        $roleSeller->givePermissionTo($permissionSeller);
 
-        $permissionB = Permission::create([
-            'name' => 'delete_user',
-            'label' => 'Deletar usuário do sistema'
-        ]);
 
-        $roleAdmin->permissions()->attach($permissionA);
-        $roleSeller->permissions()->attach($permissionB);
+        $user1 = User::first();
+        $user1->assignRole('admin');
 
-        $user = User::first();
-        $user->roles()->attach($roleAdmin);
-
-        $user = User::find(2);
-        $user->roles()->attach($roleSeller);
+        $user2 = User::find(2);
+        $user2->assignRole('seller');
     }
 
 }
